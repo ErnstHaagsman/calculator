@@ -22,8 +22,11 @@ public class Tokenizer {
                 break;
             }
 
-            if (token == null)
-                throw new InvalidTokenException();
+            if (token == null) {
+                String substring = input.substring(0, Math.min(200, input.length() - 1));
+                throw new InvalidTokenException("Invalid token: " + substring);
+            }
+
         }
 
         return tokens;

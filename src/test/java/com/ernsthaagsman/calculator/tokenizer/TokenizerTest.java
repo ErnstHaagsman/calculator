@@ -38,4 +38,11 @@ class TokenizerTest {
         assertEquals(MathTokenType.PLUS, tokens.get(1).getType());
         assertEquals(MathTokenType.NUMBER, tokens.get(2).getType());
     }
+
+    @Test
+    void testInvalidToken(){
+        assertThrows(InvalidTokenException.class, () -> {
+            Tokenizer.tokenize("This is not a valid mathematical expression");
+        });
+    }
 }
