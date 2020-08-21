@@ -18,6 +18,16 @@ class TokenizerTest {
     }
 
     @Test
+    void testFloat() throws Exception {
+        // Act
+        List<MathToken> tokens = Tokenizer.tokenize("1.5");
+
+        // Assert
+        assertEquals(1, tokens.size());
+        assertEquals(MathTokenType.NUMBER, tokens.get(0).getType());
+    }
+
+    @Test
     void testPlus() throws Exception {
         // Act
         List<MathToken> tokens = Tokenizer.tokenize("+");
