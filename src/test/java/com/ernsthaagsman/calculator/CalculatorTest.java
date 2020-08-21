@@ -8,7 +8,12 @@ class CalculatorTest {
     private final Calculator calculator = new Calculator();
 
     @Test
-    void isAlive(){
-        assertEquals("2", calculator.calculateExpression("1 + 1"));
+    void basicAddition(){
+        assertEquals("2.0", calculator.calculateExpression("1 + 1"));
+    }
+
+    @Test
+    void basicMultiplication() {
+        assertEquals("10.0", calculator.calculateExpression("5 * 2"));
     }
 }

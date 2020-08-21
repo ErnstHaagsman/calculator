@@ -1,18 +1,25 @@
 package com.ernsthaagsman.calculator;
 
-import com.ernsthaagsman.calculator.tokenizer.MathToken;
-import com.ernsthaagsman.calculator.tokenizer.Tokenizer;
-
-import java.util.List;
+import java.util.Scanner;
 
 public class CalculatorCli {
     public static void main(String[] args) throws Exception {
-        String expr = "1 + 1";
+        Scanner scanner = new Scanner(System.in);
+        Calculator calculator = new Calculator();
 
-        List<MathToken> tokenList = Tokenizer.tokenize(expr);
+        System.out.println("Use 'exit' to end");
 
-        for (MathToken t : tokenList){
-            System.out.println(t.getType());
+        while(true){
+            System.out.print("calc> ");
+            String expression = scanner.nextLine();
+
+            if(expression.isBlank())
+                continue;
+
+            if(expression.trim().toLowerCase().equals("exit"))
+                return;
+
+            System.out.println(calculator.calculateExpression(expression));
         }
     }
 }
