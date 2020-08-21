@@ -5,6 +5,11 @@ import java.util.regex.Pattern;
 
 public enum MathTokenType {
     PLUS ("\\+"),
+    MINUS("\\-"),
+    MULTIPLY("\\*"),
+    DIVIDE("/"),
+    OPAREN("\\("),
+    CPAREN("\\)"),
     NUMBER ("[0-9.]+");
 
     private final Pattern regex;
