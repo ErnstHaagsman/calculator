@@ -97,6 +97,16 @@ class TokenizerTest {
     }
 
     @Test
+    void testR() throws Exception {
+        // Act
+        List<MathToken> tokens = Tokenizer.tokenize("r(0.75)");
+
+        // Assert
+        assertEquals(4, tokens.size());
+        assertEquals(MathTokenType.R, tokens.get(0).getType());
+    }
+
+    @Test
     void testInvalidToken() {
         assertThrows(InvalidTokenException.class, () -> {
             Tokenizer.tokenize("This is not a valid mathematical expression");

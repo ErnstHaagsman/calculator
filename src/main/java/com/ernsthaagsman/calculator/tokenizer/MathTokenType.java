@@ -10,6 +10,7 @@ public enum MathTokenType {
     DIVIDE("/"),
     OPAREN("\\("),
     CPAREN("\\)"),
+    R("r"),
     NUMBER ("[0-9.]+");
 
     private final Pattern regex;

@@ -154,6 +154,48 @@ class MathParserTest {
     }
 
     @Test
+    void testRNode() throws Exception{
+        // Arrange
+        List<MathToken> tokenList = new LinkedList<>(List.of(
+                new MathToken(MathTokenType.R, "r"),
+                new MathToken(MathTokenType.OPAREN, "("),
+                new MathToken(MathTokenType.NUMBER, "1"),
+                new MathToken(MathTokenType.CPAREN, ")")
+        ));
+
+        // Act
+        MathParser parser = new MathParser();
+        AstNode tree = parser.parse(tokenList);
+
+        // Assert
+        assertThat(tree, instanceOf(RNode.class));
+        RNode node = (RNode)tree;
+        assertThat(node.getChild(), instanceOf(NumberNode.class));
+    }
+
+    @Test
+    void testRNodeNested() throws Exception{
+        // Arrange
+        List<MathToken> tokenList = new LinkedList<>(List.of(
+                new MathToken(MathTokenType.R, "r"),
+                new MathToken(MathTokenType.OPAREN, "("),
+                new MathToken(MathTokenType.NUMBER, "1"),
+                new MathToken(MathTokenType.MINUS, "-"),
+                new MathToken(MathTokenType.NUMBER, "0.1"),
+                new MathToken(MathTokenType.CPAREN, ")")
+        ));
+
+        // Act
+        MathParser parser = new MathParser();
+        AstNode tree = parser.parse(tokenList);
+
+        // Assert
+        assertThat(tree, instanceOf(RNode.class));
+        RNode node = (RNode)tree;
+        assertThat(node.getChild(), instanceOf(SubtractionNode.class));
+    }
+
+    @Test
     void testNoRhs(){
         // Arrange
         List<MathToken> tokenList = new LinkedList<>(List.of(

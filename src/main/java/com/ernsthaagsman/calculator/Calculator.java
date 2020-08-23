@@ -21,7 +21,7 @@ public class Calculator {
             return Double.toString(result);
         }
         catch (InvalidSyntaxException| InvalidTokenException e){
-            return "Could not interpret: " + e.getMessage();
+            return e.getMessage();
         }
     }
 }

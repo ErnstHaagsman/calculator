@@ -86,6 +86,12 @@ public class MathParser {
             AstNode node = parseExpression();
             consume(MathTokenType.CPAREN);
             return node;
+        } else if (tokens.peek().getType() == MathTokenType.R) {
+            MathToken token = consume(MathTokenType.R);
+            consume(MathTokenType.OPAREN);
+            AstNode node = parseExpression();
+            consume(MathTokenType.CPAREN);
+            return new RNode(token, node);
         } else {
             throw new InvalidSyntaxException("Unexpected: " + tokens.peek().getType());
         }

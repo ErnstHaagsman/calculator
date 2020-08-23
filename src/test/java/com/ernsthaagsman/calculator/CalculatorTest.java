@@ -2,6 +2,8 @@ package com.ernsthaagsman.calculator;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
@@ -15,5 +17,12 @@ class CalculatorTest {
     @Test
     void basicMultiplication() {
         assertEquals("10.0", calculator.calculateExpression("5 * 2"));
+    }
+
+    @Test
+    void invalidExpression() {
+        String output = calculator.calculateExpression("Hello!");
+
+        assertThat(output, containsStringIgnoringCase("Invalid"));
     }
 }

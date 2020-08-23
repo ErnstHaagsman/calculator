@@ -3,6 +3,8 @@ package com.ernsthaagsman.calculator.interpreter;
 import com.ernsthaagsman.calculator.ast.*;
 import com.ernsthaagsman.calculator.parser.InvalidSyntaxException;
 
+import java.util.Random;
+
 public class MathInterpreter {
     public static double interpret(AstNode tree){
         return visit(tree);
@@ -19,9 +21,16 @@ public class MathInterpreter {
             return visitMultiplication((MultiplicationNode)node);
         } else if (node instanceof DivisionNode){
             return visitDivision((DivisionNode)node);
+        } else if (node instanceof RNode){
+            return visitR((RNode)node);
         }
 
         throw new UnsupportedOperationException("Unknown node type: " + node.getClass().getName());
+    }
+
+    private static double visitR(RNode node) {
+        double p = visit(node.getChild());
+        return calcR(p);
     }
 
     private static double visitNumber(NumberNode node){
@@ -42,5 +51,13 @@ public class MathInterpreter {
 
     private static double visitDivision(DivisionNode node) {
         return visit(node.getLeft()) / visit(node.getRight());
+    }
+
+    private static double calcR(double p){
+        if(p < 0 || p > 1)
+            throw new UnsupportedOperationException("Value should be between 0 and 1");
+
+        Random r = new Random();
+        return r.nextDouble() <= p ? 1 : 0;
     }
 }

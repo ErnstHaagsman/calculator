@@ -105,4 +105,33 @@ class MathInterpreterTest {
         // Assert
         assertEquals(3.00, result);
     }
+
+    @Test
+    void testR() throws Exception {
+        // Arrange
+        AstNode div_left = new NumberNode(new MathToken(MathTokenType.NUMBER, "989"));
+        AstNode div_right = new NumberNode(new MathToken(MathTokenType.NUMBER, "1000"));
+        AstNode div = new DivisionNode(new MathToken(MathTokenType.DIVIDE, "/"), div_left, div_right);
+        AstNode root = new RNode(new MathToken(MathTokenType.R, "r"), div);
+
+        // Act
+        double result = MathInterpreter.interpret(root);
+
+        // Assert
+        assertEquals(1.00, result);
+    }
+
+    @Test
+    void testInvalidR() {
+        // Arrange
+        AstNode add_left = new NumberNode(new MathToken(MathTokenType.NUMBER, "0.95"));
+        AstNode add_right = new NumberNode(new MathToken(MathTokenType.NUMBER, "1"));
+        AstNode add = new AdditionNode(new MathToken(MathTokenType.MULTIPLY, "*"), add_left, add_right);
+        AstNode root = new RNode(new MathToken(MathTokenType.R, "r"), add);
+
+        // Assert
+        assertThrows(UnsupportedOperationException.class, () -> {
+            MathInterpreter.interpret(root);
+        });
+    }
 }
