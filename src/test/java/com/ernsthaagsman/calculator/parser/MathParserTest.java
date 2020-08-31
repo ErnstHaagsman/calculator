@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.Matchers.*;
@@ -16,9 +18,9 @@ class MathParserTest {
     @Test
     void testNumber() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.NUMBER, "1")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -32,11 +34,11 @@ class MathParserTest {
     @Test
     void testAddition() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.NUMBER, "1"),
                 new MathToken(MathTokenType.PLUS, "+"),
                 new MathToken(MathTokenType.NUMBER, "1")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -52,11 +54,11 @@ class MathParserTest {
     @Test
     void testSubtraction() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.NUMBER, "1"),
                 new MathToken(MathTokenType.MINUS, "-"),
                 new MathToken(MathTokenType.NUMBER, "1")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -72,11 +74,11 @@ class MathParserTest {
     @Test
     void testMultiplication() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.NUMBER, "1"),
                 new MathToken(MathTokenType.MULTIPLY, "*"),
                 new MathToken(MathTokenType.NUMBER, "1")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -92,11 +94,11 @@ class MathParserTest {
     @Test
     void testDivision() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.NUMBER, "1"),
                 new MathToken(MathTokenType.DIVIDE, "/"),
                 new MathToken(MathTokenType.NUMBER, "1")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -112,11 +114,11 @@ class MathParserTest {
     @Test
     void testParens() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.OPAREN, "("),
                 new MathToken(MathTokenType.NUMBER, "1"),
                 new MathToken(MathTokenType.CPAREN, ")")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -129,7 +131,7 @@ class MathParserTest {
     @Test
     void testNested() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.OPAREN, "("),
                 new MathToken(MathTokenType.NUMBER, "2"),
                 new MathToken(MathTokenType.PLUS, "+"),
@@ -137,7 +139,7 @@ class MathParserTest {
                 new MathToken(MathTokenType.CPAREN, ")"),
                 new MathToken(MathTokenType.MULTIPLY, "*"),
                 new MathToken(MathTokenType.NUMBER, "5")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -156,12 +158,12 @@ class MathParserTest {
     @Test
     void testRNode() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.R, "r"),
                 new MathToken(MathTokenType.OPAREN, "("),
                 new MathToken(MathTokenType.NUMBER, "1"),
                 new MathToken(MathTokenType.CPAREN, ")")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -176,14 +178,14 @@ class MathParserTest {
     @Test
     void testRNodeNested() throws Exception{
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.R, "r"),
                 new MathToken(MathTokenType.OPAREN, "("),
                 new MathToken(MathTokenType.NUMBER, "1"),
                 new MathToken(MathTokenType.MINUS, "-"),
                 new MathToken(MathTokenType.NUMBER, "0.1"),
                 new MathToken(MathTokenType.CPAREN, ")")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -198,10 +200,10 @@ class MathParserTest {
     @Test
     void testNoRhs(){
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.NUMBER, "1"),
                 new MathToken(MathTokenType.PLUS, "+")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();
@@ -213,9 +215,9 @@ class MathParserTest {
     @Test
     void testNoNumbers(){
         // Arrange
-        List<MathToken> tokenList = new LinkedList<>(List.of(
+        List<MathToken> tokenList = Stream.of(
                 new MathToken(MathTokenType.PLUS, "+")
-        ));
+        ).collect(Collectors.toList());
 
         // Act
         MathParser parser = new MathParser();

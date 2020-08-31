@@ -16,9 +16,9 @@ public class Tokenizer {
                     continue;
 
                 String match = type.match(input);
-                token = new MathToken(type, match.strip());
+                token = new MathToken(type, match.trim());
                 tokens.add(token);
-                input = input.substring(match.length()).strip();
+                input = input.substring(match.length()).trim();
                 break;
             }
 

@@ -13,7 +13,7 @@ public class CalculatorCli {
             System.out.print("calc> ");
             String expression = scanner.nextLine();
 
-            if(expression.isBlank())
+            if(expression.trim().isEmpty())
                 continue;
 
             if(expression.trim().toLowerCase().equals("exit"))
